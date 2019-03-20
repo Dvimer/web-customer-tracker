@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import web.customer.tracker.webapp.entity.Customer;
 import web.customer.tracker.webapp.service.CustomerService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/customer")
 public class CustomerController
@@ -49,5 +51,14 @@ public class CustomerController
 	{
 		customerService.delete(customerId);
 		return "redirect:/customer/list";
+	}
+
+	@GetMapping("/search")
+	public String search(@RequestParam("searchName") String searchName,
+	                              Model theModel)
+	{
+		List<Customer> customers = customerService.searchCustomers(searchName);
+		theModel.addAttribute("customers", customers);
+		return "list-customers";
 	}
 }

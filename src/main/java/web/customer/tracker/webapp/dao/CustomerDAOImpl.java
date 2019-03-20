@@ -40,7 +40,25 @@ public class CustomerDAOImpl implements CustomerDAO
 	public void delete(int customerId)
 	{
 		Session currentSession = sessionFactory.getCurrentSession();
-		Customer customer = getCustomer(customerId);
-		currentSession.delete(customer);
+		Query query = currentSession.createQuery("delete from Customer where id=:customerId");
+		query.setParameter("customerId", customerId);
+		query.executeUpdate();
+	}
+
+	@Override
+	public List<Customer> searchCustomers(String searchName)
+	{
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Customer> query;
+		if (searchName != null && searchName.trim().length() > 0)
+		{
+			query = currentSession.createQuery("from Customer where lower(firstName) like :searchName or lower(lastName) like :searchName", Customer.class);
+			query.setParameter("searchName", "%" + searchName.toLowerCase() + "%");
+		}
+		else
+		{
+			query = currentSession.createQuery("from Customer", Customer.class);
+		}
+		return query.getResultList();
 	}
 }
