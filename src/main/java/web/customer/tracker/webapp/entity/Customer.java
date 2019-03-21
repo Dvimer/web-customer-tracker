@@ -16,7 +16,8 @@ public class Customer
 	private String lastName;
 	@Column(name = "email")
 	private String email;
-
+	@OneToOne(mappedBy = "customer", cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	private Insurance insurance;
 	public Customer()
 	{
 	}
