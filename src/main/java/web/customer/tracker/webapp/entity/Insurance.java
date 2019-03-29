@@ -1,17 +1,22 @@
 package web.customer.tracker.webapp.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "osago")
 public class Insurance
 {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	@Column(name = "agent")
@@ -21,20 +26,17 @@ public class Insurance
 	@Column(name = "location")
 	private String location;
 	@Column(name = "created_date")
-	private LocalDate createdDate;
+	private String  createdDate;
 	@Column(name = "start_date_insurance")
-	private LocalDate startDateInsurance;
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_name")
-	private String lastName;
-	@Column(name = "patronymic")
-	private String patronymic;
-	@Column(name = "phone_number")
-	private String phoneNumber;
+	private String startDateInsurance;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
+	@NotNull
 	@Column(name = "insurance_name")
 	private String insuranceName;
 	@Column(name = "model_auto")
+	@NotNull
 	private String modelAuto;
 	@Column(name = "kind_insurance")
 	private String kindInsurance;
@@ -42,6 +44,7 @@ public class Insurance
 	private BigDecimal baseRate;
 	@Column(name = "price")
 	private BigDecimal price;
+	// TODO: 3/26/19 добавить поле с величиной скидки в процентах
 	@Column(name = "discount")
 	private BigDecimal discount;
 	@Column(name = "discount_price")
@@ -108,35 +111,25 @@ public class Insurance
 		this.location = location;
 	}
 
-	public LocalDate getCreatedDate()
+
+	public String getCreatedDate()
 	{
 		return createdDate;
 	}
 
-	public void setCreatedDate(LocalDate createdDate)
+	public void setCreatedDate(String createdDate)
 	{
 		this.createdDate = createdDate;
 	}
 
-	public LocalDate getStartDateInsurance()
+	public String getStartDateInsurance()
 	{
 		return startDateInsurance;
 	}
 
-	public void setStartDateInsurance(LocalDate startDateInsurance)
+	public void setStartDateInsurance(String startDateInsurance)
 	{
 		this.startDateInsurance = startDateInsurance;
-	}
-
-
-	public String getPhoneNumber()
-	{
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber)
-	{
-		this.phoneNumber = phoneNumber;
 	}
 
 	public String getInsuranceName()
@@ -309,33 +302,45 @@ public class Insurance
 		this.displayedEveryone = displayedEveryone;
 	}
 
-	public String getFirstName()
+	public Customer getCustomer()
 	{
-		return firstName;
+		return customer;
 	}
 
-	public void setFirstName(String firstName)
+	public void setCustomer(Customer customer)
 	{
-		this.firstName = firstName;
+		this.customer = customer;
 	}
 
-	public String getLastName()
+	@Override
+	public String toString()
 	{
-		return lastName;
-	}
-
-	public void setLastName(String lastName)
-	{
-		this.lastName = lastName;
-	}
-
-	public String getPatronymic()
-	{
-		return patronymic;
-	}
-
-	public void setPatronymic(String patronymic)
-	{
-		this.patronymic = patronymic;
+		final StringBuilder sb = new StringBuilder("Insurance{");
+		sb.append("id=").append(id);
+		sb.append(", agent='").append(agent).append('\'');
+		sb.append(", offices=").append(Arrays.toString(offices));
+		sb.append(", location='").append(location).append('\'');
+		sb.append(", createdDate=").append(createdDate);
+		sb.append(", startDateInsurance=").append(startDateInsurance);
+		sb.append(", customer=").append(customer);
+		sb.append(", insuranceName='").append(insuranceName).append('\'');
+		sb.append(", modelAuto='").append(modelAuto).append('\'');
+		sb.append(", kindInsurance='").append(kindInsurance).append('\'');
+		sb.append(", baseRate=").append(baseRate);
+		sb.append(", price=").append(price);
+		sb.append(", discount=").append(discount);
+		sb.append(", discountPrice=").append(discountPrice);
+		sb.append(", delivery=").append(delivery);
+		sb.append(", resultPrice=").append(resultPrice);
+		sb.append(", kv=").append(kv);
+		sb.append(", kvSummary=").append(kvSummary);
+		sb.append(", dk='").append(dk).append('\'');
+		sb.append(", adminSalery=").append(adminSalery);
+		sb.append(", ourSummary=").append(ourSummary);
+		sb.append(", cashbox=").append(cashbox);
+		sb.append(", displayed=").append(displayed);
+		sb.append(", displayedEveryone=").append(displayedEveryone);
+		sb.append('}');
+		return sb.toString();
 	}
 }

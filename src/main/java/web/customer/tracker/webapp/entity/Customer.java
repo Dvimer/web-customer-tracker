@@ -16,6 +16,8 @@ public class Customer
 	private String lastName;
 	@Column(name = "email")
 	private String email;
+	@Column(name = "phone_number")
+	private String phoneNumber;
 	@OneToOne(mappedBy = "customer", cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	private Insurance insurance;
 	public Customer()
@@ -67,6 +69,26 @@ public class Customer
 	public void setEmail(String email)
 	{
 		this.email = email;
+	}
+
+	public String getPhoneNumber()
+	{
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber)
+	{
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Insurance getInsurance()
+	{
+		return insurance;
+	}
+
+	public void setInsurance(Insurance insurance)
+	{
+		this.insurance = insurance;
 	}
 
 	@Override

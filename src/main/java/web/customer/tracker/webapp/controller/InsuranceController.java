@@ -1,11 +1,16 @@
 package web.customer.tracker.webapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.customer.tracker.webapp.entity.Insurance;
 import web.customer.tracker.webapp.service.InsuranceService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.math.RoundingMode;
 
 @Controller
 @RequestMapping("/insurance")
@@ -30,8 +35,12 @@ public class InsuranceController
 	}
 
 	@PostMapping("/saveInsurance")
-	public String saveInsurance(@ModelAttribute("insurance") Insurance insurance)
+	public String saveInsurance(@ModelAttribute("insurance") @RequestBody @Valid Insurance insurance)
 	{
+		if (insurance.getDiscount() != null && insurance.getPrice() != null)
+		{
+			insurance.setDiscountPrice(insurance.getPrice().divide(insurance.getDiscount(), 2, RoundingMode.HALF_UP));
+		}
 		insuranceService.addInsurance(insurance);
 		return "redirect:/insurance/list";
 	}
@@ -59,4 +68,11 @@ public class InsuranceController
 //		theModel.addAttribute("customers", customers);
 //		return "list-customers";
 //	}
+	@ExceptionHandler
+	public ResponseEntity handleException(Throwable th, HttpServletRequest request)
+	{
+		/// TODO: 3/29/19 Отлавливать ошибки
+		System.out.println(th);
+		return null;
+	}
 }

@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `web_customer_tracker` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE IF NOT EXISTS `web_insurance_tracker` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `web_customer_tracker`;
 -- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
 --
@@ -30,7 +30,7 @@ CREATE TABLE `customer` (
   `last_name` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

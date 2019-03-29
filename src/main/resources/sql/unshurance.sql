@@ -2,34 +2,32 @@ USE `web_customer_tracker`;
 
 DROP TABLE IF EXISTS insurance;
 
-CREATE TABLE insurance(
-  id int(11) NOT NULL AUTO_INCREMENT,
-  agent varchar(45) DEFAULT NULL ,
-  offices varchar(300) DEFAULT NULL ,
-  location varchar(100) DEFAULT NULL ,
-  created_date date NOT NULL ,
-  start_date_insurance date DEFAULT NULL ,
-  first_name varchar (150) NOT NULL ,
-  last_name varchar (150) NOT NULL ,
-  patronymic varchar (150) NOT NULL ,
-  fio varchar (150) NOT NULL ,
-  phone_number varchar (11) NOT NULL ,
-  insurance_name varchar (100) NOT NULL ,
-  model_auto varchar (100) NOT NULL ,
-  kind_insurance varchar (100) DEFAULT NULL ,
-  base_rate integer (10) DEFAULT NULL ,
-  price integer (10) DEFAULT NULL ,
-  discount integer (10) DEFAULT NULL ,
-  discount_price integer (10) DEFAULT NULL ,
-  delivery integer (10) DEFAULT NULL ,
-  result_price integer (10) DEFAULT NULL ,
-  kv integer (10) DEFAULT NULL ,
-  kv_summary integer (10) DEFAULT NULL ,
-  dk varchar (400) DEFAULT NULL ,
-  admin_salery integer (10) DEFAULT NULL ,
-  our_summary integer (10) DEFAULT NULL ,
-  cashbox integer (10) DEFAULT NULL ,
-  displayed integer (10) DEFAULT NULL ,
-  displayed_everyone integer (10) DEFAULT NULL ,
-  PRIMARY KEY (id)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET =latin1;
+CREATE TABLE osago
+(
+    id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    agent varchar(45),
+    offices varchar(300),
+    location varchar(100),
+    created_date varchar(100),
+    start_date_insurance varchar(100),
+    insurance_name varchar(100) NOT NULL,
+    model_auto varchar(100) NOT NULL,
+    kind_insurance varchar(100),
+    base_rate int(10),
+    price decimal(10,2),
+    discount decimal(10,2),
+    discount_price decimal(10,2),
+    delivery int(10),
+    result_price decimal(10,2),
+    kv int(10),
+    kv_summary int(10),
+    dk varchar(400),
+    admin_salery int(10),
+    our_summary int(10),
+    cashbox int(10),
+    displayed int(10),
+    displayed_everyone int(10),
+    customer_id int(11),
+    CONSTRAINT FK_DETAIL FOREIGN KEY (customer_id) REFERENCES customer (id)
+);
+CREATE INDEX FK_CUSTOMER_idx ON osago (customer_id);

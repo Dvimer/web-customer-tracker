@@ -1,13 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Cp1251" language="java" %>
 <html>
 <head>
     <title>Add insurance</title>
     <link rel="stylesheet"
           type="text/css"
           href="${pageContext.request.contextPath}/resources/css/style.css"/>
-
+    <meta charset="utf-8">
     <link rel="stylesheet"
           type="text/css"
           href="${pageContext.request.contextPath}/resources/css/add-customer-style.css"/>
@@ -21,112 +21,112 @@
 
 <div id="container">
     <h3>Save Customer</h3>
-    <form:form action="saveInsurance" modelAttribute="insurance" method="post">
+    <form:form action="saveInsurance" modelAttribute="insurance" method="post" acceptCharset="utf-8">
         <form:hidden path="id"/>
         <table>
             <tbody>
             <tr>
-                <td><label>РђРіРµРЅС‚</label></td>
+                <td><label>Агент</label></td>
                 <td><form:input path="agent"/></td>
             </tr>
             <tr>
-                <td><label>РћС„РёСЃ</label></td>
+                <td><label>Офис</label></td>
                 <td><form:input path="offices"/></td>
             </tr>
             <tr>
-                <td><label>РўРµСЂСЂРёС‚РѕСЂРёСЏ</label></td>
+                <td><label>Территория</label></td>
                 <td><form:input path="location"/></td>
             </tr>
             <tr>
-                <td><label style="background-color: red">Р”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ</label></td>
+                <td><label style="background-color: red">Дата создания</label></td>
                 <td><form:input path="createdDate"/></td>
             </tr>
             <tr>
-                <td><label>Р”Р°С‚Р° РЅР°С‡Р°Р»Р° РїРѕР»РёСЃР°</label></td>
+                <td><label>Дата начала полиса</label></td>
                 <td><form:input path="startDateInsurance"/>
             </tr>
             <tr>
-                <td><label style="background-color: red">РРјСЏ</label></td>
-                <td><form:input path="firstName"/></td>
+                <td><label style="background-color: red">Имя</label></td>
+                <td><form:input path="customer.firstName"/></td>
             </tr>
             <tr>
-                <td><label>Р¤Р°РјРёР»РёСЏ</label></td>
-                <td><form:input path="lastName"/></td>
+                <td><label>Фамилия</label></td>
+                <td><form:input path="customer.lastName"/></td>
+            </tr>
+                <%--<tr>--%>
+                <%--<td><label>Отчество</label></td>--%>
+                <%--<td><form:input path="patronymic"/></td>--%>
+                <%--</tr>--%>
+            <tr>
+                <td><label style="background-color: red">Телефон</label></td>
+                <td><form:input path="customer.phoneNumber"/></td>
             </tr>
             <tr>
-                <td><label>РћС‚С‡РµСЃС‚РІРѕ</label></td>
-                <td><form:input path="patronymic"/></td>
-            </tr>
-            <tr>
-                <td><label style="background-color: red">РўРµР»РµС„РѕРЅ</label></td>
-                <td><form:input path="phoneNumber"/></td>
-            </tr>
-            <tr>
-                <td><label style="background-color: red">РЎС‚СЂР°С…РѕРІР°СЏ РєРѕРјРїР°РЅРёСЏ</label></td>
+                <td><label style="background-color: red">Страховая компания</label></td>
                 <td><form:input path="insuranceName"/></td>
             </tr>
             <tr>
-                <td><label style="background-color: red">РњРѕРґРµР»СЊ Р°РІС‚Рѕ</label></td>
+                <td><label style="background-color: red">Модель авто</label></td>
                 <td><form:input path="modelAuto"/></td>
             </tr>
             <tr>
-                <td><label>Р’РёРґ СЃС‚СЂР°С…РѕРІРєРё</label></td>
+                <td><label>Вид страховки</label></td>
                 <td><form:input path="kindInsurance"/></td>
             </tr>
             <tr>
-                <td><label>Р‘Р°Р·РѕРІС‹Р№ С‚Р°СЂРёС„</label></td>
+                <td><label>Базовый тариф</label></td>
                 <td><form:input path="baseRate"/></td>
             </tr>
             <tr>
-                <td><label>Р¦РµРЅР°</label></td>
+                <td><label>Цена</label></td>
                 <td><form:input path="price"/></td>
             </tr>
             <tr>
-                <td><label>РЎРєРёРґРєР°</label></td>
+                <td><label>Скидка</label></td>
                 <td><form:input path="discount"/></td>
             </tr>
             <tr>
-                <td><label>Р¦РёРЅР° СЃРѕ СЃРєРёРґРєРѕР№</label></td>
+                <td><label>Цина со скидкой</label></td>
                 <td><form:input path="discountPrice"/></td>
             </tr>
             <tr>
-                <td><label>Р”РѕСЃС‚Р°РІРєР°</label></td>
+                <td><label>Доставка</label></td>
                 <td><form:input path="delivery"/></td>
             </tr>
             <tr>
-                <td><label>РС‚РѕРіРѕРІР°СЏ СЃСѓРјРјР°</label></td>
+                <td><label>Итоговая сумма</label></td>
                 <td><form:input path="resultPrice"/></td>
             </tr>
             <tr>
-                <td><label>РљР’</label></td>
+                <td><label>КВ</label></td>
                 <td><form:input path="kv"/></td>
             </tr>
             <tr>
-                <td><label>РС‚РѕРі(РљР’)</label></td>
+                <td><label>Итог(КВ)</label></td>
                 <td><form:input path="kvSummary"/></td>
             </tr>
             <tr>
-                <td><label>Р”Рљ</label></td>
+                <td><label>ДК</label></td>
                 <td><form:input path="dk"/></td>
             </tr>
             <tr>
-                <td><label>Р—Рџ РђРґРјРёРЅР°Рј</label></td>
+                <td><label>ЗП Админам</label></td>
                 <td><form:input path="adminSalery"/></td>
             </tr>
             <tr>
-                <td><label>РќР°С€ РёС‚РѕРі</label></td>
+                <td><label>Наш итог</label></td>
                 <td><form:input path="ourSummary"/></td>
             </tr>
             <tr>
-                <td><label>РљР°СЃСЃР°</label></td>
+                <td><label>Касса</label></td>
                 <td><form:input path="cashbox"/></td>
             </tr>
             <tr>
-                <td><label>Р’С‹РІРµР»Рё РѕР±С‰.</label></td>
+                <td><label>Вывели общ.</label></td>
                 <td><form:input path="displayed"/></td>
             </tr>
             <tr>
-                <td><label>Р’С‹РІРµР» РєР°Р¶РґС‹Р№</label></td>
+                <td><label>Вывел каждый</label></td>
                 <td><form:input path="displayedEveryone"/></td>
             </tr>
             <tr>
